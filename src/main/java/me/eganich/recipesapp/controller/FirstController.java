@@ -1,4 +1,4 @@
-package me.eganich.recipesapp.controllers;
+package me.eganich.recipesapp.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
