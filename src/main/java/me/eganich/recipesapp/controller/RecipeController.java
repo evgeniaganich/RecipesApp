@@ -1,25 +1,23 @@
 package me.eganich.recipesapp.controller;
 
 import me.eganich.recipesapp.model.Recipe;
-import me.eganich.recipesapp.service.Service;
+import me.eganich.recipesapp.service.RecipeServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-
 @RestController
-@RequestMapping("/recipe")
+@RequestMapping("/recipes")
 public class RecipeController {
 
-    private final Service service;
+    private final RecipeServiceImpl service;
 
-    public RecipeController(Service service) {
+    public RecipeController(RecipeServiceImpl service) {
         this.service = service;
     }
-    @GetMapping("/getRecipe/{id}")
+    @GetMapping("{id}")
     public Recipe getRecipe(@PathVariable int id) {
         return this.service.getRecipe(id);
     }
-    @PostMapping("/addRecipe")
+    @PostMapping()
     public Recipe createRecipe(@RequestBody Recipe recipe) {
         return this.service.addRecipe(recipe);
     }

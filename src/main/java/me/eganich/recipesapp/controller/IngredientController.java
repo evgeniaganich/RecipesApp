@@ -1,23 +1,22 @@
 package me.eganich.recipesapp.controller;
 
 import me.eganich.recipesapp.model.Ingredient;
-import me.eganich.recipesapp.model.Recipe;
-import me.eganich.recipesapp.service.Service;
+import me.eganich.recipesapp.service.IngredientServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/ingredient")
+@RequestMapping("/ingredients")
 public class IngredientController {
-    private final Service service;
+    private final IngredientServiceImpl service;
 
-    public IngredientController(Service service) {
+    public IngredientController(IngredientServiceImpl service) {
         this.service = service;
     }
-    @GetMapping("/getIngredient/{id}")
+    @GetMapping("/{id}")
     public Ingredient getIngredient(@PathVariable int id) {
         return this.service.getIngredient(id);
     }
-    @PostMapping("/addIngredient")
+    @PostMapping()
     public Ingredient createIngredient(@RequestBody Ingredient ingredient) {
         return this.service.addIngredient(ingredient);
     }
