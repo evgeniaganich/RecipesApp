@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Recipe {
     private final String recipeName;
-    private final int timeOfCooking;
-    private final List<Ingredient> ingredientList;
-    private final List<String> steps;
+    private int timeOfCooking;
+    private List<Ingredient> ingredientList;
+    private List<String> steps;
 
     private final int id;
     private static int counter = 1;
@@ -45,5 +45,17 @@ public class Recipe {
 
     public int getId() {
         return id;
+    }
+
+    public void setTimeOfCooking(int timeOfCooking) {
+        this.timeOfCooking = timeOfCooking;
+    }
+
+    public void setIngredientList(List<Ingredient> ingredientList) {
+        this.ingredientList = ingredientList;
+    }
+
+    public void setSteps(List<String> steps) {
+        this.steps = steps;
     }
 }

@@ -2,8 +2,8 @@ package me.eganich.recipesapp.model;
 
 public class Ingredient {
     private final String ingredientName;
-    private final int number;
-    private final String measureUnit;
+    private int number;
+    private String measureUnit;
 
     private static int counter = 1;
 
@@ -42,5 +42,13 @@ public class Ingredient {
 
     public int getId() {
         return id;
+    }
+
+    public void setMeasureUnit(String measureUnit) {
+        this.measureUnit = measureUnit;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 }
