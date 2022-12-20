@@ -1,6 +1,7 @@
 package me.eganich.recipesapp.controller;
 
 import me.eganich.recipesapp.model.Recipe;
+import me.eganich.recipesapp.service.RecipeService;
 import me.eganich.recipesapp.service.RecipeServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,9 +9,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/recipes")
 public class RecipeController {
 
-    private final RecipeServiceImpl service;
+    private final RecipeService service;
 
-    public RecipeController(RecipeServiceImpl service) {
+    public RecipeController(RecipeService service) {
         this.service = service;
     }
     @GetMapping("{id}")

@@ -12,20 +12,15 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Recipe addRecipe(Recipe recipe) {
-        if (recipes.containsKey(recipe.getId())) {
-            throw new RuntimeException("Такой рецепт уже есть в списке");
-        } else {
-            recipes.put(recipe.getId(), recipe);
-        }
+        recipes.put(recipe.getId(), recipe);
         return recipe;
     }
 
     @Override
     public Recipe getRecipe(int id) {
-        if (recipes.containsKey(id)) {
-            return recipes.get(id);
-        } else {
+        if (!recipes.containsKey(id)) {
             throw new RuntimeException("Такого рецепта нет в базе данных");
         }
+        return recipes.get(id);
     }
 }

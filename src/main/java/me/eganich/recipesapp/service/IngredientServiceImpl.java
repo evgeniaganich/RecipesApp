@@ -11,20 +11,15 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     public Ingredient addIngredient(Ingredient ingredient) {
-        if (ingredients.containsKey(ingredient.getId())) {
-            throw new RuntimeException("Такой рецепт уже есть в списке");
-        } else {
-            ingredients.put(ingredient.getId(), ingredient);
-        }
+        ingredients.put(ingredient.getId(), ingredient);
         return ingredient;
     }
 
     @Override
     public Ingredient getIngredient(int id) {
-        if (ingredients.containsKey(id)) {
-            return ingredients.get(id);
-        } else {
-            throw new RuntimeException("Такого ингредиента нет в базе данных");
+        if (!ingredients.containsKey(id)) {
+            throw new RuntimeException("Такого рецепта нет в базе данных");
         }
+        return ingredients.get(id);
     }
 }
