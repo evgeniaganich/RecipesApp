@@ -1,6 +1,7 @@
 package me.eganich.recipesapp.service;
 
 import me.eganich.recipesapp.model.Recipe;
+import me.eganich.recipesapp.model.WrongRecipeException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -20,7 +21,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public Recipe getRecipe(int id) {
         if (!recipes.containsKey(id)) {
-            throw new RuntimeException("Такого рецепта нет в базе данных");
+            throw new WrongRecipeException("Такого рецепта нет в базе данных");
         }
         return recipes.get(id);
     }
@@ -32,7 +33,7 @@ public class RecipeServiceImpl implements RecipeService {
     public Recipe updateRecipe(int id, Recipe recipe) {
         Recipe updatedRecipe = recipes.get(id);
         if (updatedRecipe == null) {
-            throw new RuntimeException("Такого рецепта нет в списке");
+            throw new WrongRecipeException("Такого рецепта нет в списке");
         }
         updatedRecipe.setSteps(recipe.getSteps());
         updatedRecipe.setIngredientList(recipe.getIngredientList());

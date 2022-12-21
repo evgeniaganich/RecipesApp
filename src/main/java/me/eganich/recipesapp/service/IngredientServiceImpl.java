@@ -1,6 +1,7 @@
 package me.eganich.recipesapp.service;
 
 import me.eganich.recipesapp.model.Ingredient;
+import me.eganich.recipesapp.model.WrongIngredientException;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -19,7 +20,7 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     public Ingredient getIngredient(int id) {
         if (!ingredients.containsKey(id)) {
-            throw new RuntimeException("Такого рецепта нет в базе данных");
+            throw new WrongIngredientException("Такого ингредиента нет в базе данных");
         }
         return ingredients.get(id);
     }
@@ -32,7 +33,7 @@ public class IngredientServiceImpl implements IngredientService {
     public Ingredient updateIngredient(int id, Ingredient ingredient) {
         Ingredient updatedIngredient = ingredients.get(id);
         if (updatedIngredient == null) {
-            throw new RuntimeException("Такого ингредиента нет в списке");
+            throw new WrongIngredientException("Такого ингредиента нет в списке");
         }
         updatedIngredient.setMeasureUnit(ingredient.getMeasureUnit());
         updatedIngredient.setNumber(ingredient.getNumber());
