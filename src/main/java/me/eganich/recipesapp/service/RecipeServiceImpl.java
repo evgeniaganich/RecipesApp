@@ -2,6 +2,7 @@ package me.eganich.recipesapp.service;
 
 import me.eganich.recipesapp.model.Recipe;
 import me.eganich.recipesapp.model.WrongRecipeException;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -11,10 +12,14 @@ import java.util.Map;
 @Service
 public class RecipeServiceImpl implements RecipeService {
     private final Map<Integer, Recipe> recipes = new HashMap<>();
+    private int counter = 1;
 
     @Override
     public Recipe addRecipe(Recipe recipe) {
-        recipes.put(recipe.getId(), recipe);
+        if (StringUtils.isBlank(recipe.getRecipeName())) {
+            throw new WrongRecipeException("Необходимо указать название рецепта!");
+        }
+        recipes.put(counter++, recipe);
         return recipe;
     }
 

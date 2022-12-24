@@ -1,54 +1,12 @@
 package me.eganich.recipesapp.model;
 
+import lombok.Data;
+
+@Data
 public class Ingredient {
     private final String ingredientName;
     private int number;
     private String measureUnit;
-
-    private static int counter = 1;
-
     private final int id;
 
-    public Ingredient(String ingredientName, int number, String measureUnit) {
-        if (ingredientName == null) {
-            throw new RuntimeException("Необходимо указать название ингредиента");
-        } else {
-            this.ingredientName = ingredientName;
-        }
-        if (number <= 0) {
-            throw new RuntimeException("Количество ингредиентов не может быть меньше или равно 0");
-        } else {
-            this.number = number;
-        }
-        if (measureUnit == null) {
-            throw new RuntimeException("Необходимо указать единицу измерения для ингредиента");
-        } else {
-            this.measureUnit = measureUnit;
-        }
-        this.id = counter++;
-    }
-
-    public String getIngredientName() {
-        return ingredientName;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public String getMeasureUnit() {
-        return measureUnit;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setMeasureUnit(String measureUnit) {
-        this.measureUnit = measureUnit;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
 }

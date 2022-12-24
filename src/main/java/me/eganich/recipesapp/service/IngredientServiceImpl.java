@@ -2,6 +2,8 @@ package me.eganich.recipesapp.service;
 
 import me.eganich.recipesapp.model.Ingredient;
 import me.eganich.recipesapp.model.WrongIngredientException;
+import me.eganich.recipesapp.model.WrongRecipeException;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -10,10 +12,14 @@ import java.util.Map;
 @org.springframework.stereotype.Service
 public class IngredientServiceImpl implements IngredientService {
     private final Map<Integer, Ingredient> ingredients = new HashMap<>();
+    private int counter = 1;
 
     @Override
     public Ingredient addIngredient(Ingredient ingredient) {
-        ingredients.put(ingredient.getId(), ingredient);
+        if (StringUtils.isBlank(ingredient.getIngredientName())) {
+            throw new WrongIngredientException("Необходимо указать название ингредиента!");
+        }
+        ingredients.put(counter++, ingredient);
         return ingredient;
     }
 
