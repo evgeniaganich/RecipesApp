@@ -11,6 +11,7 @@ import me.eganich.recipesapp.model.Ingredient;
 import me.eganich.recipesapp.model.Recipe;
 import me.eganich.recipesapp.service.IngredientService;
 import me.eganich.recipesapp.service.IngredientServiceImpl;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,7 @@ import java.util.Collection;
 @RequestMapping("/ingredients")
 @Tag(name = "Ингредиенты", description =  "CRUD-операции и другие эндпоинты для работы с ингредиентами")
 public class IngredientController {
+
     private final IngredientService service;
 
     public IngredientController(IngredientService service) {
