@@ -3,12 +3,11 @@ package me.eganich.recipesapp.service;
 import org.springframework.stereotype.Service;
 
 @Service
-public interface RecipeFilesService {
+public interface IngredientFilesService {
 
-    boolean saveRecipeToFile(String json);
+    boolean saveIngredientToFile(String json);
 
-    String readRecipeFromFile();
-
+    String readIngredientFromFile();
 
     boolean cleanDataFile();
 }

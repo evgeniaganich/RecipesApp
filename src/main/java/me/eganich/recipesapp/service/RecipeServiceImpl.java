@@ -70,13 +70,13 @@ public class RecipeServiceImpl implements RecipeService {
     private void saveRecipeToFile() {
         try {
             String json = new ObjectMapper().writeValueAsString(recipes);
-            RecipeFilesService.saveRecipeToFile(json);
+            recipeFilesService.saveRecipeToFile(json);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
     }
     private void readRecipeFromFile(){
-        String json = RecipeFilesService.readRecipeFromFile();
+        String json = recipeFilesService.readRecipeFromFile();
         try {
             recipes = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Recipe>>() {
             });
