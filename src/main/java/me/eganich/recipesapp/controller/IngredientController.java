@@ -21,7 +21,7 @@ import java.util.Collection;
 @RequestMapping("/ingredients")
 @Tag(name = "Ингредиенты", description =  "CRUD-операции и другие эндпоинты для работы с ингредиентами")
 public class IngredientController {
-    @Qualifier("ingredientService")
+
     private final IngredientService service;
 
     public IngredientController(IngredientService service) {
