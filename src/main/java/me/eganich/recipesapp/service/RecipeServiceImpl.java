@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import me.eganich.recipesapp.model.Recipe;
 import me.eganich.recipesapp.model.WrongRecipeException;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -15,7 +16,6 @@ import java.util.Map;
 
 @Service
 public class RecipeServiceImpl implements RecipeService {
-
     private final RecipeFilesService recipeFilesService;
     private Map<Integer, Recipe> recipes = new HashMap<>();
     private int counter = 1;

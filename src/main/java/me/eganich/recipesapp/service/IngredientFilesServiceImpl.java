@@ -2,11 +2,12 @@ package me.eganich.recipesapp.service;
 
 import me.eganich.recipesapp.service.IngredientFilesService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
+@Service
 public class IngredientFilesServiceImpl implements IngredientFilesService {
         @Value("${path.to.recipe.data.file}")
         private String dataFilePath;
