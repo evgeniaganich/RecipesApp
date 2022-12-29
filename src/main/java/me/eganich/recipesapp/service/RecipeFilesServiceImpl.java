@@ -1,5 +1,6 @@
 package me.eganich.recipesapp.service;
 
+import me.eganich.recipesapp.model.WrongRecipeException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class RecipeFilesServiceImpl implements RecipeFilesService{
         try {
             return Files.readString(Path.of(dataFilePath, dataFileName));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new WrongRecipeException("Не удается прочитать рецепт");
         }
     }
     @Override

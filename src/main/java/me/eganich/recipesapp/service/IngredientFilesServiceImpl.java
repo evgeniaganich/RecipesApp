@@ -1,5 +1,6 @@
 package me.eganich.recipesapp.service;
 
+import me.eganich.recipesapp.model.WrongIngredientException;
 import me.eganich.recipesapp.service.IngredientFilesService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class IngredientFilesServiceImpl implements IngredientFilesService {
             try {
                 return Files.readString(Path.of(dataFilePath, dataFileName));
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new WrongIngredientException("Не удается прочитать ингредиент");
             }
         }
         @Override
