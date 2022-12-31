@@ -2,6 +2,8 @@ package me.eganich.recipesapp.service;
 
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+
 
 public interface IngredientFilesService {
 
@@ -10,4 +12,6 @@ public interface IngredientFilesService {
     String readIngredientFromFile();
 
     boolean cleanDataFile();
+
+    File getDataFile();
 }

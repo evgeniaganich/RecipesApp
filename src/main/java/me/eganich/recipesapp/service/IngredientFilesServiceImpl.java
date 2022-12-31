@@ -1,10 +1,10 @@
 package me.eganich.recipesapp.service;
 
 import me.eganich.recipesapp.model.WrongIngredientException;
-import me.eganich.recipesapp.service.IngredientFilesService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,7 +12,7 @@ import java.nio.file.Path;
 public class IngredientFilesServiceImpl implements IngredientFilesService {
         @Value("${path.to.recipe.data.file}")
         private String dataFilePath;
-        @Value("${name.of.recipe.data.file}")
+        @Value("${name.of.ingredient.data.file}")
         private String dataFileName;
 
         @Override
@@ -46,5 +46,9 @@ public class IngredientFilesServiceImpl implements IngredientFilesService {
             }
 
         }
+    @Override
+    public File getDataFile() {
+        return new File(dataFilePath + "/" + dataFileName);
+    }
     }
 
