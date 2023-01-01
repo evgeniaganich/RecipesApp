@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
 
 @RestController
-@RequestMapping("/recipeFiles")
+@RequestMapping("/files")
 public class FilesController {
     private final RecipeFilesService recipeFilesService;
 
@@ -39,7 +39,7 @@ public class FilesController {
             return ResponseEntity.noContent().build();
         }
     }
-    @PostMapping(value = "/importRecipes", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/recipes", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Void> uploadRecipesDataFile(@RequestParam MultipartFile file) {
         recipeFilesService.cleanDataFile();
         File dataFile = recipeFilesService.getDataFile();
@@ -51,7 +51,7 @@ public class FilesController {
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
-    @PostMapping(value = "/importIngredients", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/ingredients", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Void> uploadIngredientsDataFile(@RequestParam MultipartFile file) {
         ingredientFilesService.cleanDataFile();
         File dataFile = ingredientFilesService.getDataFile();
