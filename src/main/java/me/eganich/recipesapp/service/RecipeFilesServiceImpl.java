@@ -8,8 +8,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
 @Service
-public class RecipeFilesServiceImpl implements RecipeFilesService{
+public class RecipeFilesServiceImpl implements RecipeFilesService {
     @Value("${path.to.recipe.data.file}")
     private String dataFilePath;
     @Value("${name.of.recipe.data.file}")
@@ -19,12 +20,13 @@ public class RecipeFilesServiceImpl implements RecipeFilesService{
     public boolean saveRecipeToFile(String json) {
         try {
             cleanDataFile();
-           Files.writeString(Path.of(dataFilePath, dataFileName), json);
-           return true;
+            Files.writeString(Path.of(dataFilePath, dataFileName), json);
+            return true;
         } catch (IOException e) {
             return false;
         }
     }
+
     @Override
     public String readRecipeFromFile() {
         try {
@@ -33,6 +35,7 @@ public class RecipeFilesServiceImpl implements RecipeFilesService{
             throw new WrongRecipeException("Не удается прочитать рецепт");
         }
     }
+
     @Override
     public boolean cleanDataFile() {
         Path path = Path.of(dataFilePath, dataFileName);
@@ -46,8 +49,18 @@ public class RecipeFilesServiceImpl implements RecipeFilesService{
         }
 
     }
+
     @Override
     public File getDataFile() {
         return new File(dataFilePath + "/" + dataFileName);
+    }
+
+    @Override
+    public Path createTempFile(String suffix) {
+        try {
+            return Files.createTempFile(Path.of(dataFilePath), "tempFile", suffix);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

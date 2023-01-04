@@ -14,4 +14,7 @@ public interface IngredientService {
     Ingredient updateIngredient(int id, Ingredient ingredient);
 
     Ingredient removeIngredient(int id);
+
+
+
 }

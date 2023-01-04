@@ -2,6 +2,8 @@ package me.eganich.recipesapp.service;
 
 import me.eganich.recipesapp.model.Recipe;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Collection;
 
 public interface RecipeService {
@@ -15,4 +17,6 @@ public interface RecipeService {
     Recipe updateRecipe(int id, Recipe recipe);
 
     Recipe removeRecipe(int id);
+
+    Path createRecipesFile() throws IOException;
 }

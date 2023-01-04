@@ -6,10 +6,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import me.eganich.recipesapp.model.Recipe;
 import me.eganich.recipesapp.model.WrongRecipeException;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,9 +24,14 @@ public class RecipeServiceImpl implements RecipeService {
     private Map<Integer, Recipe> recipes = new HashMap<>();
     private int counter = 1;
 
-    public RecipeServiceImpl(RecipeFilesService recipeFilesService) {
+    private final IngredientService ingredientService;
+
+
+    public RecipeServiceImpl(RecipeFilesService recipeFilesService, IngredientService ingredientService) {
         this.recipeFilesService = recipeFilesService;
+        this.ingredientService = ingredientService;
     }
+
 
 
     @PostConstruct
@@ -47,10 +56,12 @@ public class RecipeServiceImpl implements RecipeService {
         }
         return recipes.get(id);
     }
+
     @Override
     public Collection<Recipe> getAll() {
         return recipes.values();
     }
+
     @Override
     public Recipe updateRecipe(int id, Recipe recipe) {
         Recipe updatedRecipe = recipes.get(id);
@@ -63,10 +74,12 @@ public class RecipeServiceImpl implements RecipeService {
         saveRecipeToFile();
         return updatedRecipe;
     }
+
     @Override
     public Recipe removeRecipe(int id) {
         return recipes.remove(id);
     }
+
     private void saveRecipeToFile() {
         try {
             String json = new ObjectMapper().writeValueAsString(recipes);
@@ -75,7 +88,8 @@ public class RecipeServiceImpl implements RecipeService {
             throw new RuntimeException(e);
         }
     }
-    private void readRecipeFromFile(){
+
+    private void readRecipeFromFile() {
         String json = recipeFilesService.readRecipeFromFile();
         try {
             recipes = new ObjectMapper().readValue(json, new TypeReference<HashMap<Integer, Recipe>>() {
@@ -83,5 +97,19 @@ public class RecipeServiceImpl implements RecipeService {
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public Path createRecipesFile() throws IOException {
+        Path path = recipeFilesService.createTempFile("recipes");
+        for (Recipe recipe : recipes.values()) {
+            try (Writer writer = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
+                writer.append("Название рецепта: " + recipe.getRecipeName() + '\n' + '\n' +
+                        "Время приготовления: " + recipe.getTimeOfCooking() + '\n' + '\n' +
+                        "Ингредиенты: " + '\n' + '\n' + recipe.ingredientsToString() + '\n' +
+                        "Инструкция приготовления: " + '\n' + '\n' + recipe.stepsToString() + '\n');
+            }
+        }
+        return path;
     }
 }

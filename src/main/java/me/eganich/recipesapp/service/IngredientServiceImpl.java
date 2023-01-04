@@ -4,14 +4,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.eganich.recipesapp.model.Ingredient;
-import me.eganich.recipesapp.model.Recipe;
 import me.eganich.recipesapp.model.WrongIngredientException;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.PostConstruct;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.sql.Array;
+import java.util.*;
 
 @org.springframework.stereotype.Service
 public class IngredientServiceImpl implements IngredientService {
@@ -81,4 +79,5 @@ public class IngredientServiceImpl implements IngredientService {
             throw new RuntimeException(e);
         }
     }
+
 }

@@ -3,6 +3,7 @@ package me.eganich.recipesapp.service;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.nio.file.Path;
 
 
 public interface RecipeFilesService {
@@ -15,4 +16,6 @@ public interface RecipeFilesService {
     boolean cleanDataFile();
 
     File getDataFile();
+
+    Path createTempFile(String suffix);
 }
